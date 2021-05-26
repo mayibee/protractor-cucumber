@@ -1,0 +1,4 @@
+node_modules
+report/*
+jars
+.DS_Store
