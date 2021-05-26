@@ -1,0 +1,53 @@
+{
+  "name": "protractor-cucumber",
+  "version": "1.0.0",
+  "description": "Protractor Cucumber Framework for Automation Testing",
+  "main": "index.js",
+  "scripts": {
+    "chrome": "protractor conf_chrome.js",
+    "firefox": "./node_modules/.bin/protractor conf_firefox.js",
+    "multi": "./node_modules/.bin/protractor conf_multi.js",
+    "test": "protractor conf.js"
+  },
+  "keywords": [
+    "test",
+    "protractor",
+    "protractor-framework",
+    "cucumber",
+    "cucumber-js",
+    "gherkin",
+    "bdd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "AB",
+  "license": "MIT",
+  "peerDependencies": {
+    "@cucumber/cucumber": "^7.0.0",
+    "protractor": "^5.0.0 || ^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "cucumber": {
+      "optional": true
+    },
+    "@cucumber/cucumber": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "protractor": "^7.0.0",
+    "protractor-cucumber-framework": "^8.0.4",
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.1",
+    "selenium-standalone": "^6.23.0"
+  },
+  "dependencies": {
+    "cucumber-html-reporter": "^5.4.0",
+    "js-yaml": "^4.1.0",
+    "multiple-cucumber-html-reporter": "^1.18.0"
+  }
+}
