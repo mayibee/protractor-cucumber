@@ -16,3 +16,5 @@ After(async function (scenarioResult){
         });
     }
 });
+
+setDefaultTimeout(5*60*1000);

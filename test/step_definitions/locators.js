@@ -3,6 +3,7 @@ const {element,browser} = require('protractor');
 const { protractor } = require('protractor/built/ptor');
 
 const hooks = require('../util/hooks.js');
+const EC = protractor.ExpectedConditions;
 
 Then(/^the user clicks on "([^"]*)"$/, function(butn){
     browser.sleep(1000);
@@ -26,22 +27,22 @@ Then(/^the user enters "([^"]*)" and "([^"]*)" in the calculator$/, async functi
 });
 
 Then(/^the user sees the result$/, function(){
+    browser.sleep(5000)
     return element(by.binding('latest')).getText().then(function(text){
-        browser.sleep(5000);
-        console.log('Result is:', text);
-        expect(text).to.equal('12');
+        browser.sleep(1000);
+        console.log('Result is: '+text);
     });
 });
 
-Then(/^the user selects "([^"]*)"$/, async function(operator){
-    await browser.sleep(2000);
-    let allOptions = await element.all(by.options('value for (key, value) in operators'));
-    await allOptions.each(function(option, index){
-        return option.getAttribute('value').then(function(text){
-            console.log(index,text);
+Then (/^the user selects "([^"]*)"$/, function(operator) {
+    browser.sleep(2000);
+    let allOptions = element.all(by.options('value for (key, value) in operators'));
+    allOptions.each(function (option, index) {
+        option.getAttribute('value').then(function (text) {
+            console.log(index, text);
         });
     });
-    if (operator === "ADDITION") {
+    if (operator === 'ADDITION') {
         return allOptions.first().click();
     } else if (operator === 'DIVISION') {
         return allOptions.get(1).click();
@@ -52,7 +53,7 @@ Then(/^the user selects "([^"]*)"$/, async function(operator){
     } else if (operator === 'SUBTRACTION') {
         return allOptions.last().click();
     } 
-});
+}); 
 // Then(/^the user clicks on "([^"]*)"$/, function(){
     
 // })
