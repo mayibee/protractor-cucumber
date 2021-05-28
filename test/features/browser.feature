@@ -7,7 +7,7 @@ Scenario: 01 Verify the webpage
     When the user verifies the url
     Then the user waits for 5 seconds
     Then the user reads the title "Protractor - end-to-end testing for AngularJS"
-@test
+
 Scenario: 02 Navigate the application
     Given the user navigates to "http://www.protractortest.org/"
     Then the user navigates to "http://www.protractortest.org/#/api"
