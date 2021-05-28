@@ -56,7 +56,7 @@ exports.config = {
         browser.manage().window().setSize(1600,1000);
 
         // implicit wait
-        browser.manage().timeouts().implicitlyWait(5000);
+        browser.manage().timeouts().implicitlyWait(20000);
 
         //assertion library
         global.chai = require('chai');

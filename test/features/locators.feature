@@ -18,13 +18,13 @@ Scenario: 04 By Model
     Given the user navigates to "http://juliemr.github.io/protractor-demo/"   
     When the user enters "8" and "4" in the calculator
     Then the user clicks on "Go!"
-@test
+
 Scenario: 05 By Binding and By Exact Binding
     Given the user navigates to "http://juliemr.github.io/protractor-demo/"  
     When the user enters "9" and "3" in the calculator
     Then the user clicks on "Go!"
     Then the user sees the result
-
+@test
 Scenario: 06 By Options For Dropdowns and Element All Functions
     Given the user navigates to "http://juliemr.github.io/protractor-demo/"  
     When the user enters "7" and "5" in the calculator

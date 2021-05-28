@@ -27,14 +27,32 @@ Then(/^the user enters "([^"]*)" and "([^"]*)" in the calculator$/, async functi
 
 Then(/^the user sees the result$/, function(){
     return element(by.binding('latest')).getText().then(function(text){
-        browser.sleep(2000);
+        browser.sleep(5000);
         console.log('Result is:', text);
+        expect(text).to.equal('12');
     });
 });
 
-// Then(/^the user clicks on "([^"]*)"$/, function(){
-    
-// })
+Then(/^the user selects "([^"]*)"$/, async function(operator){
+    await browser.sleep(2000);
+    let allOptions = await element.all(by.options('value for (key, value) in operators'));
+    await allOptions.each(function(option, index){
+        return option.getAttribute('value').then(function(text){
+            console.log(index,text);
+        });
+    });
+    if (operator === "ADDITION") {
+        return allOptions.first().click();
+    } else if (operator === 'DIVISION') {
+        return allOptions.get(1).click();
+    } else if (operator === 'MODULO') {
+        return allOptions.get(2).click();
+    } else if (operator === 'MULTIPLICATION') {
+        return allOptions.get(3).click();
+    } else if (operator === 'SUBTRACTION') {
+        return allOptions.last().click();
+    } 
+});
 // Then(/^the user clicks on "([^"]*)"$/, function(){
     
 // })
