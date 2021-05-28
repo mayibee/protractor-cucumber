@@ -1,5 +1,5 @@
 const {Given,When,Then} = require('@cucumber/cucumber');
-const {element,browser, by} = require('protractor');
+const {element,browser, by, $} = require('protractor');
 const { protractor } = require('protractor/built/ptor');
 
 const hooks = require('../util/hooks.js');
@@ -90,3 +90,31 @@ Then(/^the user clicks on "([^"]*)" through custom locator$/, async function(el)
         // Use the custom locator.
        return element(by.buttonSimple(el)).click();
 });
+
+When(/^I type "([^"]*)"$/, async function(text){
+    await element(by.name('q')).sendKeys(text).sendKeys(protractor.Key.TAB);
+    await element(by.name('q')).getAttribute('value').then((search)=>{
+        expect(text).to.equal(search);
+    });
+    return element(by.name('q')).sendKeys(protractor.Key.ENTER);
+})
+
+When(/^I see the results page$/, async function(){
+    await browser.sleep(5000);
+    await browser.getCurrentUrl().then((url)=>{
+        console.log(url);
+        expect(url).to.contain("DC");
+    })
+})
+
+
+When(/^the user verifies the logo is displayed$/, async function(){
+    await browser.sleep(3000);
+    await $('#nav-logo-sprites').isDisplayed().then(function(result){
+        if(result) {
+            return $('#nav-logo-sprites').click();
+        } else {
+            console.log('not displayed')
+        }
+    })
+})
