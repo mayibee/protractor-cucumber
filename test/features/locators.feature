@@ -24,7 +24,7 @@ Scenario: 05 By Binding and By Exact Binding
     When the user enters "9" and "3" in the calculator
     Then the user clicks on "Go!"
     Then the user sees the result
-@test
+
 Scenario: 06 By Options For Dropdowns and Element All Functions
     Given the user navigates to "http://juliemr.github.io/protractor-demo/"  
     When the user enters "7" and "5" in the calculator
@@ -57,3 +57,20 @@ Scenario: 08 By Custom Locator
     Then the user selects "MODULO"
     Then the user clicks on "Go!" through custom locator
     Then the user sees the result
+
+Scenario: 09 Protractor Keys
+    Given I navigate to "https://www.google.com"
+    When I type "what is the time in DC"
+    Then I see the results
+
+Scenario: 10 isDisplayed, isPresent functions
+    Given the user navigates to "https://www.amazon.com"
+    Then the user verifies the logo is displayed
+    Then the user verifies "Best Sellers" link is present
+
+Scenario: 11 isEnabled, isSelected functions
+    Given the user navigates to "https://www.overleaf.com"
+    Then the user verifies checkbox for emails is enabled
+    Then the user verifies checkbox is not selected
+    Then the user clicks on the checkbox
+    Then the user verifies if the checkbox is selected

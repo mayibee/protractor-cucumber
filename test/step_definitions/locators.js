@@ -1,5 +1,5 @@
 const {Given,When,Then} = require('@cucumber/cucumber');
-const {element,browser} = require('protractor');
+const {element,browser, by} = require('protractor');
 const { protractor } = require('protractor/built/ptor');
 
 const hooks = require('../util/hooks.js');
@@ -54,6 +54,39 @@ Then (/^the user selects "([^"]*)"$/, function(operator) {
         return allOptions.last().click();
     } 
 }); 
-// Then(/^the user clicks on "([^"]*)"$/, function(){
+
+Then(/^the user sees the latest result on the table$/, async function(){
+    await browser.sleep(5000)
+    await element.all(by.repeater('result')).count().then(function(numRows) {
+        console.log('rows on table', numRows);
+    });
+    await element.all(by.exactRepeater('result in memory')).each(function(item, index){
+        item.getText().then(function(rowData){
+            console.log("row",index,"->", rowData);
+        });
+    });
+    return element.all(by.repeater('result')).each(function(item, index){
+        item.element(by.css('td:nth-child(3)')).getText().then(function(columnData){
+            console.log('column',index,'->',columnData)
+            if (index === 0) {
+                console.log('latest calculation Result:', columnData);
+            }
+        })
+    })
+})
+
+Then(/^the user clicks on "([^"]*)" through custom locator$/, async function(el){
+    // Add the custom locator.
+    by.addLocator('buttonSimple', function(buttonText, opt_parentElement) {
+        // This function will be serialized as a string and will execute in the browser. The first argument is the text for the button. The second argument is the parent element, if any.
+            let using = opt_parentElement || document;
+            buttons = using.querySelectorAll('button');
+            // Return an array of buttons with the text.
+            return Array.prototype.filter.call(buttons, function(button) {
+                return button.textContent === buttonText;
+            });
+        });
     
-// })
+        // Use the custom locator.
+       return element(by.buttonSimple(el)).click();
+});
