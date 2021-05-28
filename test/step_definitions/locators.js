@@ -118,3 +118,61 @@ When(/^the user verifies the logo is displayed$/, async function(){
         }
     })
 })
+
+Then (/^the user verifies "([^"]*)" link is present$/, function(link){
+    return element(by.cssContainingText('.hmenu-item',link)).isPresent().then(function(result){
+        if (result) {
+            console.log('link is present');
+        } else {
+            console.log('FAIL: link is not present')
+        }
+    });
+});
+
+Then (/^the user verifies checkbox for emails is enabled$/, function(){
+    return element(by.id('newslettercheckbox')).isEnabled().then(function(result){
+        if(result){
+            element(by.id('newslettercheckbox')).element(by.xpath('..')).getText().then(function(value){
+                expect(value).to.contain("I’d like emails about product offers and company news and events.");
+            });
+        } 
+    });
+});
+
+Then (/^the user verifies checkbox is not selected$/, function(){
+    browser.sleep(2000)
+    return element(by.id('newslettercheckbox')).isSelected().then(function(result){
+        if(!result){
+            return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
+                expect(attr).to.contain("ng-empty");
+                console.log('selected')
+            })
+        } else {
+            return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
+                expect(attr).to.contain("ng-not-empty");
+                console.log('not selected')
+            });
+        }
+    });
+});
+
+Then (/^the user clicks on the checkbox$/, function(){
+    return element(by.id('newslettercheckbox')).click();
+});
+
+Then (/^the user verifies if the checkbox is selected$/, function(){
+    browser.sleep(2000)
+    return element(by.id('newslettercheckbox')).isSelected().then(function(result){
+        if(result){
+            return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
+                expect(attr).to.contain("ng-not-empty");
+                console.log('selected')
+            })
+        } else {
+            return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
+                expect(attr).to.contain("ng-empty");
+                console.log('not selected')
+            })
+        }
+    });
+});

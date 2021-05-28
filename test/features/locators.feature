@@ -63,11 +63,10 @@ Scenario: 09 Protractor Keys
     When I type "what is the time in DC"
     Then I see the results page
 
-@test
 Scenario: 10 isDisplayed, isPresent functions
     Given the user navigates to "https://www.amazon.com"
     Then the user verifies the logo is displayed
-    # Then the user verifies "Best Sellers" link is present
+    Then the user verifies "Best Sellers" link is present
 
 Scenario: 11 isEnabled, isSelected functions
     Given the user navigates to "https://www.overleaf.com"
