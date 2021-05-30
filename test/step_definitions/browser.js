@@ -79,3 +79,31 @@ Then(/^the user accepts the alert$/, async function() {
   await browser.switchTo().alert().accept;
   return browser.sleep(2000);
 });
+
+Then(/^the user scrolls to the footer icon$/, async function() {
+  await browser.executeScript('arguments[0].scrollIntoView();', $('.rtm-footer-milky')).then(function(){
+    browser.sleep(2000);
+    return element(by.linkText('About')).click();
+  })
+});
+
+Then(/^the user scrolls down to the bottom of the Page$/, async function() {
+  await browser.executeScript('window.scrollTo(0,document.body.scrollHeight)').then(function(){
+    return browser.sleep(2000);
+  })
+});
+
+Then(/^the user scrolls up to the top of the page$/, async function() {
+  await browser.executeScript('window.scrollTo(0,0)').then(function(){
+    return browser.sleep(2000);
+  })
+});
+
+Then(/^the user uses JavaScript Click$/, async function() {
+  await browser.executeScript('arguments[0].click();', element(by.linkText('Upgrade')));
+  return browser.sleep(2000);
+});
+
+Then(/^$/, async function() {
+  
+});

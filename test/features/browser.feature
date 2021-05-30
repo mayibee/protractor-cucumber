@@ -26,7 +26,7 @@ Scenario: 05 Mouse Drag and Drop
     When the user reads the title as "Drag and Drop"
     Then the user can drag and drop the squares
 
-@test
+
 Scenario: 06 Mouse Click
     Given the user navigates to "http://the-internet.herokuapp.com/javascript_alerts"
     When the user reads the title as "JavaScript Alerts"
@@ -42,6 +42,7 @@ Scenario: 08 Scroll Up and Down
     Then the user scrolls down to the bottom of the Page
     Then the user scrolls up to the top of the page
 
+    @test
 Scenario: 09 JavaScript Click
     Given the user navigates to "https://www.rememberthemilk.com"
     Then the user uses JavaScript Click
