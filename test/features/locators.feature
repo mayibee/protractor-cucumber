@@ -74,3 +74,5 @@ Scenario: 11 isEnabled, isSelected functions
     Then the user verifies checkbox is not selected
     Then the user clicks on the checkbox
     Then the user verifies if the checkbox is selected
+
+
