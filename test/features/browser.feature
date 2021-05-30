@@ -42,7 +42,30 @@ Scenario: 08 Scroll Up and Down
     Then the user scrolls down to the bottom of the Page
     Then the user scrolls up to the top of the page
 
-    @test
+   
 Scenario: 09 JavaScript Click
     Given the user navigates to "https://www.rememberthemilk.com"
     Then the user uses JavaScript Click
+ 
+Scenario: 02 Wait for Visibility of Element
+    Given the user navigates to "https://www.overleaf.com"
+    When the user clicks on the "Features & Benefits" dropdown
+    Then the user selects the option "For Writing"
+
+Scenario: 03 Wait for Presence of Element
+    Given the user navigates to "https://www.overleaf.com"
+    When the user clicks on the "Help" dropdown
+    Then the user selects the option "Contact Us"
+    Then the user will see the contact us modal
+
+Scenario: 04 Wait for Invisibility of Element
+    Given the user navigates to "https://www.overleaf.com"
+    When the user clicks on the "Features & Benefits" dropdown
+    Then the user selects the option "For Writing"
+    Then the user will not see the contact us modal
+
+Scenario: 05 Wait for Staleness of Element
+    Given the user navigates to "https://www.utest.com/"
+    When the user clicks on "Projects" in the navigation bar
+    Then the user selects "Android & iOS" from the OS dropdown
+    Then the user sees the available projects

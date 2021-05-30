@@ -3,6 +3,7 @@ const {element,browser, $, $$} = require('protractor');
 const { protractor } = require('protractor/built/ptor');
 
 const hooks = require('../util/hooks.js');
+let EC = protractor.ExpectedConditions;
 
 Given(/^the user navigates to "([^"]*)"$/, async function(url) {
     await browser.get(url);
@@ -104,6 +105,52 @@ Then(/^the user uses JavaScript Click$/, async function() {
   return browser.sleep(2000);
 });
 
-Then(/^$/, async function() {
-  
+Then(/^the user clicks on the "([^"]*)" dropdown$/, async function(menu) {
+  if(menu==="Features & Benefits")
+  await $$('.dropdown-toggle').first().click();
+  else if(menu==='Help')
+  await $$('.dropdown-toggle').get(1).click();
+  return browser.sleep(2000);
+});
+
+// Then(/^the user selects the option "([^"]*)"$/, async function(opt) {
+//   await browser.wait(EC.visibilityOf($$('.dropdown-menu').get(1)), 5000).then(function(){
+//     return $$('.dropdown-menu').get(1).element(by.cssContainingText('li',opt)).click();
+//   })
+// });
+
+Then(/^the user selects the option "([^"]*)"$/, async function(opt) {
+  await browser.wait(EC.visibilityOf($('.dropdown-menu')), 5000).then(function(){
+    return $('.dropdown-menu').element(by.cssContainingText('li',opt)).click();
+  })
+});
+Then(/^the user will see the contact us modal$/, async function() {
+  await browser.wait(EC.presenceOf($('.contact-us-modal'))).then(function(){
+    return expect(element(by.name('contactForm')).isDisplayed()).to.eventually.equal(true);
+  });
+});
+
+Then(/^the user will not see the contact us modal$/, async function() {
+  await browser.wait(EC.invisibilityOf($('.contact-us-modal')),5000).then(function(){
+    return expect(element(by.name('contactForm')).isDisplayed()).to.eventually.equal(false);
+  })
+});
+
+Then(/^the user clicks on "([^"]*)" in the navigation bar$/, async function(projects) {
+  await element(by.name(projects)).click();
+  return browser.sleep(2000);
+});
+
+When (/^the user selects "([^"]*)" from the OS dropdown$/, async function (opt) {
+  await browser.wait(EC.stalenessOf(element(by.cssContainingText('a','Become a uTester'))),5000)
+  await $('.clearfix').element(by.model('filterProject.osType')).element(by.tagName('span')).click();
+  return $('.clearfix').element(by.model('filterProject.osType')).element(by.tagName('input')).sendKeys(opt).sendKeys(protractor.Key.ENTER);
+});
+
+Then (/^the user sees the available projects$/, function () {
+  return browser.wait(EC.invisibilityOf(element(by.cssContainingText('li', 'Suggested'))),10000).then(function(){
+      return element.all(by.repeater('project in groups.all.feedItems')).count().then(function(count){
+          return expect(count).to.equal(7);
+      });
+  })
 });
