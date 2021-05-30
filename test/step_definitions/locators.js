@@ -145,12 +145,12 @@ Then (/^the user verifies checkbox is not selected$/, function(){
         if(!result){
             return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
                 expect(attr).to.contain("ng-empty");
-                console.log('selected')
+                console.log('not selected')
             })
         } else {
             return element(by.id('newslettercheckbox')).getAttribute('class').then(function(attr){
                 expect(attr).to.contain("ng-not-empty");
-                console.log('not selected')
+                console.log('selected')
             });
         }
     });

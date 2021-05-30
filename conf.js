@@ -53,7 +53,7 @@ exports.config = {
 
         //browser window setting
         browser.manage().window().maximize();
-        browser.manage().window().setSize(1600,1000);
+        // browser.manage().window().setSize(1600,1000);
 
         // implicit wait
         browser.manage().timeouts().implicitlyWait(50000);
