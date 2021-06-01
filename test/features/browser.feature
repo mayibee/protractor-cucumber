@@ -69,3 +69,10 @@ Scenario: 05 Wait for Staleness of Element
     When the user clicks on "Projects" in the navigation bar
     Then the user selects "Android & iOS" from the OS dropdown
     Then the user sees the available projects
+
+Scenario: 06 Windows
+    Given the user navigates to "http://the-internet.herokuapp.com/windows"
+    When the user reads the title as "Opening a new window"
+    Then the user clicks on "Click Here" link
+    Then the user reads the new window
+    Then the user goes back to the old window

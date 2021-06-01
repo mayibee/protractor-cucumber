@@ -154,3 +154,35 @@ Then (/^the user sees the available projects$/, function () {
       });
   })
 });
+
+Then(/^the user clicks on "([^"]*)" link$/, async function(linkTitle) {
+  return element(by.linkText(linkTitle)).click();
+});
+
+Then(/^the user reads the new window$/, async function() {
+  return browser.getAllWindowHandles().then(function(handles){
+    let browserHandles = handles;
+    console.log(browserHandles);
+    return browser.switchTo().window(browserHandles[1]).then(async function(){
+      await browser.sleep(2000);
+      await browser.getCurrentUrl().then((url)=>expect(url).to.contain('windows/new'));
+      return $('.example').getText().then((text)=>expect(text).to.equal('New Window'));
+    })
+  })
+});
+
+Then(/^the user goes back to the old window$/, async function() {
+  return browser.close().then(async function(){
+    await browser.switchTo().window(browserHandles[0]);
+    await browser.sleep(2000);
+    return expect(element(by.linkText('Click Here')).isDisplayed()).to.eventually.equal(true);
+  })
+});
+
+Then(/^$/, async function() {
+ 
+});
+
+Then(/^$/, async function() {
+ 
+});
