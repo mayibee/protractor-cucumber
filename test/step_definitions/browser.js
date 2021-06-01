@@ -4,6 +4,7 @@ const { protractor } = require('protractor/built/ptor');
 
 const hooks = require('../util/hooks.js');
 let EC = protractor.ExpectedConditions;
+let browserHandles = [];
 
 Given(/^the user navigates to "([^"]*)"$/, async function(url) {
     await browser.get(url);
@@ -160,14 +161,15 @@ Then(/^the user clicks on "([^"]*)" link$/, async function(linkTitle) {
 });
 
 Then(/^the user reads the new window$/, async function() {
-  return browser.getAllWindowHandles().then(function(handles){
-    let browserHandles = handles;
+  return browser.getAllWindowHandles().then(async function(handles){
+    browserHandles = handles;
     console.log(browserHandles);
-    return browser.switchTo().window(browserHandles[1]).then(async function(){
+    await browser.switchTo().window(browserHandles[1]).then(async function(){
       await browser.sleep(2000);
       await browser.getCurrentUrl().then((url)=>expect(url).to.contain('windows/new'));
       return $('.example').getText().then((text)=>expect(text).to.equal('New Window'));
     })
+    return browserHandles;
   })
 });
 
@@ -179,10 +181,15 @@ Then(/^the user goes back to the old window$/, async function() {
   })
 });
 
-Then(/^$/, async function() {
- 
+Then(/^the user switches to the iframe$/, async function() {
+  await browser.switchTo().frame(element(by.tagName('iframe'))).then(function(){
+    $('#tinymce').click();
+    $('#tinymce').clear();
+    $('#tinymce').sendKeys('This is my text in the frame');
+    return browser.sleep(2000);
+  });
 });
 
-Then(/^$/, async function() {
- 
+Then(/^the user exits the iframe$/, async function() {
+  return browser.switchTo().defaultContent();
 });
