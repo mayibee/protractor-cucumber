@@ -9,6 +9,12 @@ Then(/^the user clicks on "([^"]*)"$/, function(butn){
     browser.sleep(1000);
     return element(by.buttonText(butn)).click();
 });
+Then(/^the user clicks on the button "([^"]*)"$/, async function(butn){
+    await browser.sleep(1000);
+    await element(by.buttonText(butn)).click();
+    return expect($('#email_container').getText()).to.eventually.contain('The email or mobile number you entered isn’t connected to an account');
+});
+
 
 Then(/^the user clicks on the button that contains "([^"]*)"$/, function(btn){
     browser.sleep(1000);

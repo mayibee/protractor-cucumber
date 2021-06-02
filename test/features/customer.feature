@@ -1,6 +1,5 @@
 Feature: Customer
 
-@test
 Scenario: 01 Customer Login
     Given the user navigates to home page
     When the user logs in as a "Customer"

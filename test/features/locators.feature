@@ -1,9 +1,8 @@
 Feature: Protractor Locators
 
-
 Scenario: 01 By Button Text
     Given the user navigates to "https://www.facebook.com/"
-    Then the user clicks on "Log In"
+    Then the user clicks on the button "Log In"
 
 Scenario: 02 By Partial Button Text
     Given the user navigates to "https://www.netflix.com"
@@ -74,5 +73,3 @@ Scenario: 11 isEnabled, isSelected functions
     Then the user verifies checkbox is not selected
     Then the user clicks on the checkbox
     Then the user verifies if the checkbox is selected
-
-

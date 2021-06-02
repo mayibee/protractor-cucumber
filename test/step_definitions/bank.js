@@ -54,5 +54,5 @@ Then (/^the customer sees the "([^"]*)" welcome banner$/, async function (custom
     await Cust.welcomeBanner().getText().then(function(text){
         console.log(text);
     });
-    return expect(cust.welcomeBanner().getText()).to.eventually.contain(customer);
+    return expect(Cust.welcomeBanner().getText()).to.eventually.contain(customer);
 });

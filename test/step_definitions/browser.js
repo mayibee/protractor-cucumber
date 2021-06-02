@@ -78,8 +78,9 @@ Then(/^the user does a mouse click on "([^"]*)"$/, async function(action) {
 });
 
 Then(/^the user accepts the alert$/, async function() {
-  await browser.switchTo().alert().accept;
-  return browser.sleep(5000);
+  await browser.switchTo().alert().accept();
+  await expect($('#result').getText()).to.eventually.contain('Ok');
+  return browser.sleep(2000);
 });
 
 Then(/^the user scrolls to the footer icon$/, async function() {
@@ -114,27 +115,29 @@ Then(/^the user clicks on the "([^"]*)" dropdown$/, async function(menu) {
   return browser.sleep(2000);
 });
 
-// Then(/^the user selects the option "([^"]*)"$/, async function(opt) {
-//   await browser.wait(EC.visibilityOf($$('.dropdown-menu').get(1)), 5000).then(function(){
-//     return $$('.dropdown-menu').get(1).element(by.cssContainingText('li',opt)).click();
-//   })
-// });
-
 Then(/^the user selects the option "([^"]*)"$/, async function(opt) {
-  await browser.wait(EC.visibilityOf($('.dropdown-menu')), 5000).then(function(){
-    return $('.dropdown-menu').element(by.cssContainingText('li',opt)).click();
-  })
+  if(opt==="For Writing") {
+    await browser.wait(EC.visibilityOf($$('.dropdown-menu').first()), 5000).then(function(){
+      return $('.dropdown-menu').element(by.cssContainingText('li',opt)).click();
+    });
+  } else if(opt==='Contact Us') {
+    await browser.wait(EC.visibilityOf($$('.dropdown-menu').get(1)), 5000).then(function(){
+      return $$('.dropdown-menu').get(1).element(by.cssContainingText('li',opt)).click();
+    })
+  }
+  return browser.sleep(2000);
 });
+
 Then(/^the user will see the contact us modal$/, async function() {
   await browser.wait(EC.presenceOf($('.contact-us-modal'))).then(function(){
     return expect(element(by.name('contactForm')).isDisplayed()).to.eventually.equal(true);
   });
 });
 
-Then(/^the user will not see the contact us modal$/, async function() {
-  await browser.wait(EC.invisibilityOf($('.contact-us-modal')),5000).then(function(){
-    return expect(element(by.name('contactForm')).isDisplayed()).to.eventually.equal(false);
-  })
+Then(/^the user will not see the "([^"]*)" option$/, async function(option) {
+  await browser.wait(EC.invisibilityOf($('.dropdown-menu').element(by.cssContainingText('li',option))),5000).then(function(){
+    return expect($('.dropdown-menu').element(by.cssContainingText('li',option)).isDisplayed()).to.eventually.equal(false);
+  });
 });
 
 Then(/^the user clicks on "([^"]*)" in the navigation bar$/, async function(projects) {
@@ -151,7 +154,7 @@ When (/^the user selects "([^"]*)" from the OS dropdown$/, async function (opt) 
 Then (/^the user sees the available projects$/, function () {
   return browser.wait(EC.invisibilityOf(element(by.cssContainingText('li', 'Suggested'))),10000).then(function(){
       return element.all(by.repeater('project in groups.all.feedItems')).count().then(function(count){
-          return expect(count).to.equal(7);
+          return expect(count).to.be.at.least(5);
       });
   })
 });

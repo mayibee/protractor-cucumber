@@ -26,8 +26,7 @@ Scenario: 05 Mouse Drag and Drop
     Given the user navigates to "http://the-internet.herokuapp.com/drag_and_drop"
     When the user reads the title as "Drag and Drop"
     Then the user can drag and drop the squares
-
-
+@test
 Scenario: 06 Mouse Click
     Given the user navigates to "http://the-internet.herokuapp.com/javascript_alerts"
     When the user reads the title as "JavaScript Alerts"
@@ -43,49 +42,46 @@ Scenario: 08 Scroll Up and Down
     Then the user scrolls down to the bottom of the Page
     Then the user scrolls up to the top of the page
 
-   
 Scenario: 09 JavaScript Click
     Given the user navigates to "https://www.rememberthemilk.com"
     Then the user uses JavaScript Click
  
-Scenario: 02 Wait for Visibility of Element
+Scenario: 10 Wait for Visibility of Element
     Given the user navigates to "https://www.overleaf.com"
     When the user clicks on the "Features & Benefits" dropdown
     Then the user selects the option "For Writing"
 
-Scenario: 03 Wait for Presence of Element
+Scenario: 11 Wait for Presence of Element
     Given the user navigates to "https://www.overleaf.com"
     When the user clicks on the "Help" dropdown
     Then the user selects the option "Contact Us"
     Then the user will see the contact us modal
-
-Scenario: 04 Wait for Invisibility of Element
+@test
+Scenario: 12 Wait for Invisibility of Element
     Given the user navigates to "https://www.overleaf.com"
-    When the user clicks on the "Features & Benefits" dropdown
-    Then the user selects the option "For Writing"
-    Then the user will not see the contact us modal
+    When the user clicks on the "Help" dropdown
+    Then the user will not see the "For Writing" option
+    Then the user selects the option "Contact Us"
 
-Scenario: 05 Wait for Staleness of Element
+Scenario: 13 Wait for Staleness of Element
     Given the user navigates to "https://www.utest.com/"
     When the user clicks on "Projects" in the navigation bar
     Then the user selects "Android & iOS" from the OS dropdown
     Then the user sees the available projects
 
-Scenario: 06 Windows
+Scenario: 14 Windows
     Given the user navigates to "http://the-internet.herokuapp.com/windows"
     When the user reads the title as "Opening a new window"
     Then the user clicks on "Click Here" link
     Then the user reads the new window
     Then the user goes back to the old window
 
-
-Scenario: 07 IFrame
+Scenario: 15 IFrame
     Given the user navigates to "http://the-internet.herokuapp.com/iframe"
     Then the user switches to the iframe
     Then the user exits the iframe
     Then the user reads the title as "An iFrame containing the TinyMCE WYSIWYG Editor"
 
-
-Scenario: 08 Nested Frames
+Scenario: 16 Nested Frames
     Given the user navigates to "http://the-internet.herokuapp.com/nested_frames"
     Then the user verifies the text in the middle frame
