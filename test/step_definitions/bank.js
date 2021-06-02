@@ -35,10 +35,10 @@ Then (/^the user sees manager options$/, async function () {
 Then (/^the user selects "([^"]*)" from dropdown$/, async function (customer) {
     await browser.wait(EC.stalenessOf(Home.managerButton()), 5000);
     let allCustomers = await Cust.customerDropdown();
-    await allCustomers.forEach(async function(cust,index){
+    await allCustomers.forEach(async function(cust){
         await cust.getText().then(async function(text){
             if (text === customer) {
-                await customer.click();
+                await cust.click();
             }
         });
     });
