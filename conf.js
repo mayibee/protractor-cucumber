@@ -31,7 +31,7 @@ exports.config = {
             './test/step_definitions/*.js'
             //'./test/step_definitions/*.spec.js'
         ],
-        tags: [],
+        tags: ['@test'],
         format: ['progress','json:./report/cucumber_report.json']
     },
     plugins: [

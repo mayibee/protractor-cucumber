@@ -79,7 +79,7 @@ Then(/^the user does a mouse click on "([^"]*)"$/, async function(action) {
 
 Then(/^the user accepts the alert$/, async function() {
   await browser.switchTo().alert().accept;
-  return browser.sleep(2000);
+  return browser.sleep(5000);
 });
 
 Then(/^the user scrolls to the footer icon$/, async function() {
