@@ -181,15 +181,24 @@ Then(/^the user goes back to the old window$/, async function() {
   })
 });
 
-Then(/^the user switches to the iframe$/, async function() {
-  await browser.switchTo().frame(element(by.tagName('iframe'))).then(function(){
-    $('#tinymce').click();
-    $('#tinymce').clear();
-    $('#tinymce').sendKeys('This is my text in the frame');
-    return browser.sleep(2000);
+Then (/^the user switches to the iframe$/, function(){
+  return browser.switchTo().frame(browser.driver.findElement(by.tagName('iframe'))).then(function(){
+      $('#tinymce').click();
+      $('#tinymce').clear();
+      $('#tinymce').sendKeys('This is my text in frame');
+      return browser.sleep(2000);
   });
 });
 
-Then(/^the user exits the iframe$/, async function() {
+Then (/^the user exits the iframe$/, function(){
+  return browser.switchTo().defaultContent();
+});
+
+Then (/^the user verifies the text in the middle frame$/, function(){
+  let frameTop = element(by.name('frame-top')).getWebElement();
+  browser.switchTo().frame(frameTop);
+  let frameMid = element(by.name('frame-middle')).getWebElement();
+  browser.switchTo().frame(frameMid);
+  element(by.id('content')).getText().then((text)=>{console.log(text)});
   return browser.switchTo().defaultContent();
 });

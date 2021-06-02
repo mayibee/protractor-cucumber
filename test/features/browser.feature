@@ -76,9 +76,15 @@ Scenario: 06 Windows
     Then the user clicks on "Click Here" link
     Then the user reads the new window
     Then the user goes back to the old window
-@test
+
+
 Scenario: 07 IFrame
     Given the user navigates to "http://the-internet.herokuapp.com/iframe"
     Then the user switches to the iframe
     Then the user exits the iframe
     Then the user reads the title as "An iFrame containing the TinyMCE WYSIWYG Editor"
+
+
+Scenario: 06 Nested Frames
+    Given the user navigates to "http://the-internet.herokuapp.com/nested_frames"
+    Then the user verifies the text in the middle frame
