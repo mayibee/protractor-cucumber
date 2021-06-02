@@ -44,7 +44,7 @@ Then(/^the user waits for 5 seconds$/, function() {
 
   Then(/^the user closes the browser$/, function() {
       browser.sleep(1000)
-    return browser.close();
+    // return browser.close();
   });
 
 Then(/^the user reads the title as "([^"]*)"$/, function(title) {

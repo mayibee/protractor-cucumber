@@ -31,10 +31,55 @@ exports.config = {
             './test/step_definitions/*.js'
             //'./test/step_definitions/*.spec.js'
         ],
-        tags: ['@test'],
+        tags: [],
         format: ['progress','json:./report/cucumber_report.json']
     },
-
+    plugins: [
+        {
+            package: 'protractor-multiple-cucumber-html-reporter-plugin',
+            options: {
+                jsonDir: './report/',
+                jsonOutputPath: './report/json-output-folder',
+                reportPath: './report/',
+                screenshotsDirectory: './report/screenshots/',
+                storeScreenshots: false,
+                reportSuiteAsScenarios: true,
+                openReportInBrowser: true,
+                removeOriginalJsonReportFile: true,
+                removeExistingJsonReportFile: true,
+                automaticallyGenerateReport: true,
+                launchReport: true,
+                reportName: 'Protractor Cucumber Report',
+                pageTitle: 'Regression Testing Report',
+                customData: {
+                    title: 'Report Info',
+                    data: [
+                        {label: 'Project', value: 'Our Cucumber Framework'},
+                        {label: 'Sprint', value: '1.5'},
+                        {label: 'Date', value: Date()},
+                        {label: 'Environment', value: 'Integration Testing'}
+                    ]
+                }
+            },
+            multiCapabilities: [{
+                browserName: 'chrome',
+                chromeOptions: {
+                    args: ['disable-infobars']
+                },
+                metadata: {
+                    browser: {
+                        name: 'chrome',
+                        version: '90'
+                    },
+                    device: 'MacBook Pro 15',
+                    platform: {
+                        name: 'osx',
+                        version: '10.14.6'
+                    }
+                }
+            }]
+        }
+    ],
     // Parallel testing
     // count:1 -> number of times to run the capabilities
     // shardTestFiles: false -> true specs will be sharded by feature file

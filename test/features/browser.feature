@@ -1,3 +1,4 @@
+@Regression
 Feature: Practice Browser Actions
 
 ## BROWSER ACTIONS
@@ -85,6 +86,6 @@ Scenario: 07 IFrame
     Then the user reads the title as "An iFrame containing the TinyMCE WYSIWYG Editor"
 
 
-Scenario: 06 Nested Frames
+Scenario: 08 Nested Frames
     Given the user navigates to "http://the-internet.herokuapp.com/nested_frames"
     Then the user verifies the text in the middle frame
