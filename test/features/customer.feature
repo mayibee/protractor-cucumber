@@ -6,3 +6,5 @@ Scenario: 01 Customer Login
     Then the user selects "Harry Potter" from dropdown
     Then the user clicks the login button
     Then the customer sees the "Harry Potter" welcome banner
+
+

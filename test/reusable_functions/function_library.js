@@ -7,8 +7,13 @@ let Library = function() {
         return browser.get('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login');
     }
     // common
+    //returns a promise
     this.waitForPresence = function(el,time) {
         return browser.wait(EC.presenceOf(el),time);
+    }
+    //returns a promise
+    this.waitForElVisible = function(el,time) {
+        return browser.wait(EC.visibilityOf(el), time);
     }
     
     // validations

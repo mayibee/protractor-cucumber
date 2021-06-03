@@ -56,3 +56,19 @@ Then (/^the customer sees the "([^"]*)" welcome banner$/, async function (custom
     });
     return expect(Cust.welcomeBanner().getText()).to.eventually.contain(customer);
 });
+
+Then(/^the user adds "([^"]*)" account for customer$/, async function(currency){
+    await Lib.waitForElVisible(Mgr.currencyDropdown(),5000);
+    await Mgr.currencyOptions(currency).click();
+    await Lib.waitForElVisible(Mgr.processButton(), 5000);
+    return Mgr.processButton().click();
+});
+
+Then(/^the manager clicks on "([^"]*)"$/, async function(buttonName){
+    if(buttonName === "Open Account")
+        await Mgr.openAccountButton().click();
+    else if(buttonName === 'Customers')
+        await Mgr.viewCustomersButton().click();
+    else 
+        await Mgr.addCustomerButton().click();
+});
