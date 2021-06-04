@@ -26,7 +26,7 @@ Scenario: 05 Mouse Drag and Drop
     Given the user navigates to "http://the-internet.herokuapp.com/drag_and_drop"
     When the user reads the title as "Drag and Drop"
     Then the user can drag and drop the squares
-@test
+
 Scenario: 06 Mouse Click
     Given the user navigates to "http://the-internet.herokuapp.com/javascript_alerts"
     When the user reads the title as "JavaScript Alerts"
@@ -56,7 +56,7 @@ Scenario: 11 Wait for Presence of Element
     When the user clicks on the "Help" dropdown
     Then the user selects the option "Contact Us"
     Then the user will see the contact us modal
-@test
+
 Scenario: 12 Wait for Invisibility of Element
     Given the user navigates to "https://www.overleaf.com"
     When the user clicks on the "Help" dropdown

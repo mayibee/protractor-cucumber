@@ -19,5 +19,20 @@ let MgrPage = function() {
     this.processButton = function() {
         return element(by.buttonText('Process'));
     }
+    this.customerFirstName = function() {
+        return element(by.model('fName'));
+    }
+    this.customerLastName = function() {
+        return element(by.model('lName'));
+    }
+    this.zipCode = function() {
+        return element(by.model('postCd'));
+    }
+    this.customerForm = function() {
+        return element(by.name('myForm'));
+    }
+    this.addButton = function() {
+        return this.customerForm().element(by.buttonText('Add Customer'))
+    }
 };
 module.exports = new MgrPage();

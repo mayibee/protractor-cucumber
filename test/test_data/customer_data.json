@@ -1,0 +1,49 @@
+{
+    "customers":[
+        {
+            "fName":"Mark",
+            "lName":"Lennon",
+            "postCd":"21005",
+            "accountNumber":"",
+            "currency":"Dollar",
+            "deposit": 100,
+            "withdrawal": 50
+        },
+        {
+            "fName":"Mike",
+            "lName":"Smith",
+            "postCd":"33445",
+            "accountNumber":"",
+            "currency":"Pound",
+            "deposit": 1000,
+            "withdrawal": 5
+        },
+        {
+            "fName":"Karl",
+            "lName":"Jones",
+            "postCd":"22105",
+            "accountNumber":"",
+            "currency":"Dollar",
+            "deposit": 300,
+            "withdrawal": 20
+        },
+        {
+            "fName":"Jason",
+            "lName":"Brown",
+            "postCd":"20001",
+            "accountNumber":"",
+            "currency":"Rupee",
+            "deposit": 10000,
+            "withdrawal": 500
+        },
+        {
+            "fName":"Jon",
+            "lName":"Snow",
+            "postCd":"20816",
+            "accountNumber":"",
+            "currency":"Dollar",
+            "deposit": 6874,
+            "withdrawal": 220
+        }
+    ]
+}

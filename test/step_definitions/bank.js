@@ -7,7 +7,10 @@ const Lib = require('../reusable_functions/function_library.js');
 const Home = require('../pages/home_page.js');
 const Mgr = require('../pages/manager_page.js');
 const Cust = require('../pages/customer_page.js');
+const bankData = require('../test_data/customer_data.json');
+const { BrowserStack } = require('protractor/built/driverProviders');
 let EC = protractor.ExpectedConditions;
+let customerId = '';
 
 Given(/^the user navigates to home page$/, async function() {
     await Lib.goToHomePage();
@@ -71,4 +74,35 @@ Then(/^the manager clicks on "([^"]*)"$/, async function(buttonName){
         await Mgr.viewCustomersButton().click();
     else 
         await Mgr.addCustomerButton().click();
+    return browser.sleep(1000);
+});
+
+Then(/^the user adds customer$/, async function() {
+    let customers = bankData.customers;
+    console.log(customers);
+    for(let i=0; i<customers.length; i++) {
+        await Mgr.addCustomerButton().click();
+        await browser.sleep(1000);
+        await Mgr.customerFirstName().sendKeys(customers[i].fName);
+        await Mgr.customerLastName().sendKeys(customers[i].lName);
+        await Mgr.zipCode().sendKeys(customers[i].postCd);
+        await Mgr.addButton().click();
+        // expect(browser.switchTo().alert().getText()).to.eventually.equal('Customer added successfully with customer id :') -> another option
+        await browser.switchTo().alert().getText().then(async function(text) {
+            console.log(text);
+            customerId = text.split(':')[1];
+            console.log(customers[i].fName, customerId);
+            expect(text).to.contain('Customer added successfully with customer id :');
+            return customerId;
+        });
+        await browser.switchTo().alert().accept();
+    }
+});
+
+Then(/^the user makes a deposit of "([^"]*)"$/, async function(deposit){
+    await Cust.makeDepositButton().click();
+    await browser.sleep(1000);
+    await Cust.depositAmountInput().sendKeys(deposit);
+    await Cust.depositAmountButton().click();
+    return expect(Cust.depositMessage().getText()).to.eventually.contain('Deposit Successful')
 });
