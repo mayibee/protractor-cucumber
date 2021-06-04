@@ -100,9 +100,12 @@ Then(/^the user adds customer$/, async function() {
 });
 
 Then(/^the user makes a deposit of "([^"]*)"$/, async function(deposit){
-    await Cust.makeDepositButton().click();
-    await browser.sleep(1000);
-    await Cust.depositAmountInput().sendKeys(deposit);
-    await Cust.depositAmountButton().click();
-    return expect(Cust.depositMessage().getText()).to.eventually.contain('Deposit Successful')
+    await browser.sleep(2000);
+    await Cust.makeDepositButton().click().then(async function() {
+        await browser.sleep(1000);
+        await Cust.depositAmountInput().sendKeys(deposit);
+        await Cust.depositAmountButton().click();
+        return expect(Cust.depositMessage().getText()).to.eventually.contain('Deposit Successful')
+    })
+    
 });

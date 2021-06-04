@@ -1,5 +1,9 @@
 let {After,Before,setDefaultTimeout,Status}=require('@cucumber/cucumber');
+// let yaml = require('js-yaml');
+// let fs = require('fs');
 const{browser} = require('protractor');
+
+// let env = yaml.load(fs.readFileSync('../ProtractorCucumber/test/util/baseproperties.yaml', 'utf-8'));
 
 Before(function(scenario){
     //adding later
